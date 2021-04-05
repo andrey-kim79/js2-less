@@ -269,6 +269,51 @@ a:visited {
     color: #f16d7f;
 }
 
+#goods-list-section {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 1000px;
+    top: 0;
+    left: 0;
+}
+
+#goods-list-section #goods-list-section__modal {
+    box-shadow: 0 0 5px rgb(0 0 0 / 62%);
+    border-radius: 5px;
+    box-sizing: border-box;
+    right: 140px;
+    top: 100px;
+    position: absolute;
+    background-color: white;
+    padding: 20px;
+    color: black;
+    width: 260px;
+    z-index: 3;
+}
+
+#goods-list-section #goods-list-section__modal h3,
+#goods-list-section #goods-list-section__modal p {
+    padding: 30px;
+    text-align: center;
+}
+
+#goods-list-section #goods-list-section__modal .goods-list__product-box {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(238, 233, 233, 0.644);
+}
+
+#goods-list-section #goods-list-section__modal .goods-list__product-box span {
+    width: 50%;
+}
 /***** FOOTER *****/
 
 .footer {
