@@ -158,115 +158,45 @@ class ProductItem {
         return `<div class="product-item" data-id="${this.id}">
                 <img src="${this.img}" class="product-image" alt="${this.title}">
                 <h3 class="product-item__text__title">${this.title}</h3>
-                <p class="product-item__text__price">${this.price}</p>
+                <p class="product-item__text__price">${this.price} руб</p>
                 <button class="buy-btn">Купить</button>
             </div>`;
     }
 }
 let list = new ProductsList();
 
-let btnCart = document.querySelector('.header_basket');
-let goodsListSection = document.getElementById('goods-list-section');
-let btnCloseCart = document.getElementById('goods-list-section__delete');
-let btnOrder = document.getElementsByClassName('product-card-section_btn-order');
+function itemsCart() {
+    return fetch(`${API}/getBasket.json`)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (response) {
+            let itemCart = document.querySelector('.user-cart__item-cart');
+            let obj = [];
+            itemCart.insertAdjacentHTML(
+                'afterend',
+                `<h3 class="cart-item__text__cart-price">Общая цена: ${response.amount} руб</h3>`
+            );
+            itemCart.insertAdjacentHTML(
+                'afterend',
+                `<h3 class="cart-item__text__cart-title">Общее количество: ${response.countGoods} шт</h3>`
+            );
 
-// Создаем класс корзина Cart
-class Cart {
-    constructor() {
-        this.goods = [];
-    }
-
-    fetchGoods() {
-        makeGETRequest(`${API}/getBasket.json`)
-            .then((goods) => {
-                this.goods = JSON.parse(goods);
-                console.log(`${goods}`);
-            })
-            .then(() => {
-                this.render();
-            })
-            .catch((err) => {
-                console.error('err');
+            response['contents'].forEach((item) => {
+                obj.push(`<div class="product-item__cart" data-id="${item.id_product}">
+                <img src="img/mouse.png" class="product-image__cart" alt="${item.title}">
+                <h3 class="cart-item__text__title">${item.product_name}</h3>
+                <p class="cart-item__text__price">${item.price} руб</p>
+                <p class="cart-item__text__quantity">Количество: ${item.quantity} шт</p>
+                <button class="add-btn" data-id="${item.id_product}">+</button>
+                <button class="remove-btn" data-id="${item.id_product}">-</button>
+                </div>`);
             });
-    }
-    // метод добавления товара в корзину
-    addGoods() {
-        let itemCart = this.goods.filter((el) => el.title == product.title)[0];
-
-        if (itemCart != undefined) {
-            itemCart.addQuantity();
-        } else {
-            let item = new itemCart(product);
-            this.goods.push(item);
-        }
-    }
-
-    render() {
-        let listHtml = '';
-        let goodsList = document.getElementById('goods-list__product-box');
-
-        this.goods.forEach((ItemCart, indexOfProduct) => {
-            listHtml += ItemCart.renderItemCart(indexOfProduct);
+            itemCart.innerHTML += obj.join('');
+        })
+        .catch((error) => {
+            console.log(error);
         });
-        goodsList.innerHTML = listHtml;
-
-        this.totalCartPrice();
-    }
-
-    //метод для вывода итоговой суммы корзины
-    totalCartPrice() {
-        let totalPrice = document.getElementById('goods-list__total');
-        let sum = 0;
-        this.goods.forEach((good) => {
-            sum += good.price * good.quantity;
-        });
-        totalPrice.innerText = `Итого  ${sum} рублей`;
-    }
-
-    removeGoods(index) {
-        this.goods.splice(index, 1);
-        this.render();
-    }
 }
 
-const addItemToCart = () => {
-    let productName = target.dataset.productName;
-    let product = allProducts[productName];
-    cart.addItemToCart(product);
-};
-
-class ItemCart {
-    constructor(product) {
-        this.title = product.title;
-        this.price = product.price;
-        this.src = product.src;
-        this.quantity = 1;
-    }
-    //разметка корзины
-    renderItemCart(index) {
-        return `<div class="goods-list__product-box">
-        <span class="goods-list__product-box__name">${this.title}</span>
-        <div class="goods-list__product-box__price">${this.price}</div>
-        <div class="goods-list__product-box__quantity">${this.quantity}</div>
-        <img class="goods-list__product-box__img" src=${this.src} height="100px" alt="">
-        <input type="submit" value="X" class="goods-list-item__product-box__delete" data-product-index=${index} onclick="deleteItemFromCart()">
-        </div>`;
-    }
-
-    addQuantity() {
-        this.quantity += 1;
-    }
-}
-
-let cart = new Cart();
-
-let openCart = () => {
-    cart.render();
-    goodsListSection.style.display = 'block';
-};
-
-btnCart.addEventListener('click', openCart);
-window.addEventListener('click', function (event) {});
-btnCloseCart.addEventListener('click', function (event) {
-    goodsListSection.style.display = 'none';
-});
+itemsCart();

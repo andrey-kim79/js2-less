@@ -13,7 +13,7 @@
                 <span class="header_icon_text">Tech</span>
                 <span class="header_icon_letter">Noir</span>
             </a>
-            <form class="header_form" action="#">
+            <form class="header_form" action="">
                 <button class="header_browse_block">
                     <div class="header_browse">Browse</div>
                 </button>
@@ -22,15 +22,13 @@
                 </label>
             </form>
             <div class="header_user_menu">
-                <div class="header_basket">
-                    <a class="user_basket" href="#"><img src="icon/cart_icon.png" alt="" /></a>
-                    <div id="goods-list-section" class="goods-list">
-                        <div id="goods-list-section__modal">
-                            <input type="submit" value="X" id="goods-list-section__delete" />
-                            <h3 id="goods-list_head-line">Корзина</h3>
-                            <div id="goods-list__product-box"></div>
-                            <p id="goods-list__total"></p>
-                        </div>
+                <button onclick="location.hash ='item-cart'" class="header_basket">
+                    <img src="icon/cart_icon.png" alt="" />
+                </button>
+                <div id="item-cart">
+                    <div class="user-cart">
+                        <div class="user-cart__item-cart"></div>
+                        <a href="#" class="close-cart">x</a>
                     </div>
                 </div>
                 <button type="button" name="button" class="user_menu_item">My Account</button>
@@ -70,11 +68,11 @@
                 <p class="copy_text">&copy; 2021 TechNoir All Rights Reserved.</p>
                 <div class="footer_row">
                     <div class="social-icons__items">
-                        <a class="social_icons__link" href=""><i class="fa fa-facebook"></i></a>
-                        <a class="social_icons__link" href=""><i class="fa fa-twitter"></i></a>
-                        <a class="social_icons__link" href=""><i class="fa fa-linkedin"></i></a>
-                        <a class="social_icons__link" href=""><i class="fa fa-pinterest-p"></i></a>
-                        <a class="social_icons__link" href=""><i class="fa fa-google-plus"></i></a>
+                        <a class="social_icons__link" href="#"><i class="fa fa-facebook"></i></a>
+                        <a class="social_icons__link" href="#"><i class="fa fa-twitter"></i></a>
+                        <a class="social_icons__link" href="#"><i class="fa fa-linkedin"></i></a>
+                        <a class="social_icons__link" href="#"><i class="fa fa-pinterest-p"></i></a>
+                        <a class="social_icons__link" href="#"><i class="fa fa-google-plus"></i></a>
                     </div>
                 </div>
             </div>
