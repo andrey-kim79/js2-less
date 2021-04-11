@@ -13,28 +13,23 @@
                 <span class="header_icon_text">Tech</span>
                 <span class="header_icon_letter">Noir</span>
             </a>
-            <form class="header_form" action="">
-                <button class="header_browse_block">
-                    <div class="header_browse">Browse</div>
-                </button>
-                <label>
-                    <input class="header_form_search" type="text" name="Search" placeholder="Search..." />
-                </label>
-            </form>
+            <div class="cart header_form" action="#">
+                <button class="header_browse_block header_browse">Browse</button>
+                <form action="" class="search-form">
+                    <input class="search-field header_form_search" type="text" name="Search" placeholder="Search..." />
+                    <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
             <div class="header_user_menu">
-                <button onclick="location.hash ='item-cart'" class="header_basket">
+                <button class="btn-cart header_basket" type="button">
                     <img src="icon/cart_icon.png" alt="" />
                 </button>
-                <div id="item-cart">
-                    <div class="user-cart">
-                        <div class="user-cart__item-cart"></div>
-                        <a href="#" class="close-cart">x</a>
-                    </div>
-                </div>
+                <div class="cart-block invisible"></div>
                 <button type="button" name="button" class="user_menu_item">My Account</button>
             </div>
         </header>
         <nav class="header-menu">
+            <a href="index.html" class="nav__menu_link">Home</a>
             <a href="#" class="nav__menu_link">Notebook</a>
             <a href="#" class="nav__menu_link">Mouse</a>
             <a href="#" class="nav__menu_link">Keyboard</a>
@@ -42,24 +37,12 @@
             <a href="#" class="nav__menu_link">Accoseriese</a>
             <a href="#" class="nav__menu_link">Featured</a>
             <a href="#" class="nav__menu_link">Hot Deals</a>
+            <a href="contacts.html" class="nav__menu_link">Contacts</a>
         </nav>
         <main>
             <!-- Products items-->
-            <div class="product container">
-                <div class="products"></div>
-            </div>
+            <div class="products container"></div>
         </main>
-
-        <!-- <template class="template-goods-list">
-            <div class="goods-list__product-box">
-                <span class="goods-list__product-box__name">Товар</span>
-                <img class="goods-list__product-box__img" src="" height="120px" alt="" />
-                <div class="goods-list__product-box__price">Цена</div>
-                <div class="goods-list__product-box__quantity">Количество</div>
-                <div class="goods-list__product-box__totalPrice">Итого</div>
-                <input type="submit" value="X" class="goods-list-item__product-box__delete" />
-            </div>
-        </template> -->
 
         <script src="js/main.js"></script>
 
