@@ -16,14 +16,14 @@
                 </a>
                 <div class="cart header_form" action="#">
                     <button class="header_browse_block header_browse">Browse</button>
-                    <form action="" method="POST" class="search-form" @submit.prevent="searchFor()">
+                    <form action="" method="POST" class="search-form" @submit.prevent="FilterGoods()">
                         <input
                             v-model="userSearch"
                             class="search-field header_form_search"
                             type="text"
                             placeholder="Search..."
                         />
-                        <button class="btn-search" type="submit" @click.prevent="searchFor()">
+                        <button class="btn-search" type="submit" @click.prevent="FilterGoods()">
                             <i class="fa fa-search"></i>
                         </button>
                     </form>
