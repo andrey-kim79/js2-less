@@ -419,7 +419,7 @@ const app = new Vue({
             console.log(product.id_product);
         },
 
-        searchFor() {
+        FilterGoods() {
             let text = this.userSearch.toLowerCase().trim();
             if (text === '') {
                 this.filteredProducts = this.products;
