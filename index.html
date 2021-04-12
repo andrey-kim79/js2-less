@@ -8,42 +8,60 @@
         <title>Products</title>
     </head>
     <body>
-        <header class="header container">
-            <a class="header_icon" href="index.html">
-                <span class="header_icon_text">Tech</span>
-                <span class="header_icon_letter">Noir</span>
-            </a>
-            <div class="cart header_form" action="#">
-                <button class="header_browse_block header_browse">Browse</button>
-                <form action="" class="search-form">
-                    <input class="search-field header_form_search" type="text" name="Search" placeholder="Search..." />
-                    <button class="btn-search" type="submit"><i class="fa fa-search"></i></button>
-                </form>
-            </div>
-            <div class="header_user_menu">
-                <button class="btn-cart header_basket" type="button">
-                    <img src="icon/cart_icon.png" alt="" />
-                </button>
-                <div class="cart-block invisible"></div>
-                <button type="button" name="button" class="user_menu_item">My Account</button>
-            </div>
-        </header>
-        <nav class="header-menu">
-            <a href="index.html" class="nav__menu_link">Home</a>
-            <a href="#" class="nav__menu_link">Notebook</a>
-            <a href="#" class="nav__menu_link">Mouse</a>
-            <a href="#" class="nav__menu_link">Keyboard</a>
-            <a href="#" class="nav__menu_link">Gamepad</a>
-            <a href="#" class="nav__menu_link">Accoseriese</a>
-            <a href="#" class="nav__menu_link">Featured</a>
-            <a href="#" class="nav__menu_link">Hot Deals</a>
-            <a href="contacts.html" class="nav__menu_link">Contacts</a>
-        </nav>
-        <main>
-            <!-- Products items-->
-            <div class="products container"></div>
-        </main>
-
+        <div id="app">
+            <header class="header container">
+                <a class="header_icon" href="index.html">
+                    <span class="header_icon_text">Tech</span>
+                    <span class="header_icon_letter">Noir</span>
+                </a>
+                <div class="cart header_form" action="#">
+                    <button class="header_browse_block header_browse">Browse</button>
+                    <form action="" method="POST" class="search-form" @submit.prevent="searchFor()">
+                        <input
+                            v-model="userSearch"
+                            class="search-field header_form_search"
+                            type="text"
+                            placeholder="Search..."
+                        />
+                        <button class="btn-search" type="submit" @click.prevent="searchFor()">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </form>
+                </div>
+                <div class="header_user_menu">
+                    <button class="btn-cart header_basket" type="button">
+                        <img src="icon/cart_icon.png" alt="" />
+                    </button>
+                    <div class="cart-block invisible"></div>
+                    <button type="button" name="button" class="user_menu_item">My Account</button>
+                </div>
+            </header>
+            <nav class="header-menu">
+                <a href="index.html" class="nav__menu_link">Home</a>
+                <a href="#" class="nav__menu_link">Notebook</a>
+                <a href="#" class="nav__menu_link">Mouse</a>
+                <a href="#" class="nav__menu_link">Keyboard</a>
+                <a href="#" class="nav__menu_link">Gamepad</a>
+                <a href="#" class="nav__menu_link">Accoseriese</a>
+                <a href="#" class="nav__menu_link">Featured</a>
+                <a href="#" class="nav__menu_link">Hot Deals</a>
+                <a href="contacts.html" class="nav__menu_link">Contacts</a>
+            </nav>
+            <main>
+                <!-- Products items-->
+                <div class="products container">
+                    <div class="product-item" v-for="product of filteredProducts" :key="product.id_product">
+                        <img :src="imgCatalog" alt="Some img" />
+                        <div class="desc">
+                            <h3 class="product-item__text__title">{{product.product_name}}</h3>
+                            <p class="product-item__text__price">{{product.price}} $</p>
+                            <button class="buy-btn" @click="addProduct(product)">Купить</button>
+                        </div>
+                    </div>
+                </div>
+            </main>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
         <script src="js/main.js"></script>
 
         <footer class="footer">
