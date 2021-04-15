@@ -16,23 +16,19 @@
                 </a>
                 <div class="cart header_form" action="#">
                     <button class="header_browse_block header_browse">Browse</button>
-                    <form action="" method="POST" class="search-form" @submit.prevent="FilterGoods()">
-                        <input
-                            v-model="userSearch"
-                            class="search-field header_form_search"
-                            type="text"
-                            placeholder="Search..."
-                        />
-                        <button class="btn-search" type="submit" @click.prevent="FilterGoods()">
+                    <form action="" class="search-form" @submit.prevent="filter">
+                        <searchform v-model="userSearch"></searchform>
+                        <button class="btn-search">
                             <i class="fa fa-search"></i>
                         </button>
                     </form>
                 </div>
                 <div class="header_user_menu">
-                    <button class="btn-cart header_basket" type="button">
+                    <button class="btn-cart header_basket" type="button" @click="showCart = !showCart">
                         <img src="icon/cart_icon.png" alt="" />
                     </button>
-                    <div class="cart-block invisible"></div>
+                    <cart :cart-items="cartItems" :img="imgCart" :visibility="showCart" @remove="remove"> </cart>
+
                     <button type="button" name="button" class="user_menu_item">My Account</button>
                 </div>
             </header>
@@ -49,21 +45,11 @@
             </nav>
             <main>
                 <!-- Products items-->
-                <div class="products container">
-                    <div class="product-item" v-for="product of filteredProducts" :key="product.id_product">
-                        <img :src="imgCatalog" alt="Some img" />
-                        <div class="desc">
-                            <h3 class="product-item__text__title">{{product.product_name}}</h3>
-                            <p class="product-item__text__price">{{product.price}} $</p>
-                            <button class="buy-btn" @click="addProduct(product)">Купить</button>
-                        </div>
-                    </div>
+                <div class="container">
+                    <products :products="filtered" :img="imgCatalog" @add-product="addProduct"> </products>
                 </div>
             </main>
         </div>
-        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
-        <script src="js/main.js"></script>
-
         <footer class="footer">
             <div class="footer_copyright container">
                 <p class="copy_text">&copy; 2021 TechNoir All Rights Reserved.</p>
@@ -78,5 +64,10 @@
                 </div>
             </div>
         </footer>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+        <script src="js/product.js"></script>
+        <script src="js/search.js"></script>
+        <script src="js/cart.js"></script>
+        <script src="js/main.js"></script>
     </body>
 </html>
